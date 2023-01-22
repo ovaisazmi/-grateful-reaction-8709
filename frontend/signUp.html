@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav {
+            height: 60px;
+            background-color: rgb(37, 37, 37);
+            position: fixed;
+            top: 0;
+            width: 100vmax;
+            z-index: 16;
+        }
+        
+        nav>div {
+            max-width: 1150px;
+            /* border: 1px solid red; */
+            margin: auto;
+            height: 59px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end
+        }
+        
+        #logo {
+            width: 180px;
+            height: 50px;
+            cursor: pointer;
+            /* border: 1px solid green; */
+        }
+        
+        #cartlogo {
+            width: 45px;
+            height: 45px;
+            padding: 0px;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        nav>div>div>img {
+            width: 15px;
+            height: 25px;
+            padding-top: 0px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        nav>div>div {
+            font-size: 20px;
+            color: white;
+            /* border: 1px solid red; */
+            height: 35px;
+            padding-bottom: 19px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        nav>div>input {
+            width: 400px !important;
+            height: 40px !important;
+            margin-bottom: 10px !important;
+            background-color: rgb(75, 75, 77) !important;
+            border: none !important;
+            border-radius: 4px !important;
+            color: white !important;
+            padding-left: 10px !important;
+        }
+        
+        nav>div>input::placeholder {
+            color: rgb(169, 166, 166);
+            font-size: larger;
+        }
+        
+        body {
+            margin: 0px;
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        /* Full-width input fields */
+        
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+        /* Add a background color when the inputs get focus */
+        
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        /* Set a style for all buttons */
+        
+        button {
+            background-color: #232525;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+            opacity: 0.9;
+        }
+        
+        button:hover {
+            opacity: 1;
+        }
+        
+        #sub {
+            background-color: #232525;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+            opacity: 0.9;
+        }
+        
+        #sub:hover {
+            opacity: 1;
+        }
+        /* Extra styles for the cancel button */
+        
+        .cancelbtn {
+            padding: 14px 20px;
+            background-color: #f44336;
+        }
+        /* Float cancel and signup buttons and add an equal width */
+        
+        .cancelbtn,
+        .signupbtn {
+            float: left;
+            width: 50%;
+        }
+        /* Add padding to container elements */
+        
+        .container {
+            padding: 16px;
+        }
+        /* The Modal (background) */
+        
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: #474e5d;
+            padding-top: 50px;
+        }
+        /* Modal Content/Box */
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            /* Could be more or less, depending on screen size */
+        }
+        /* Style the horizontal ruler */
+        
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+        /* The Close Button (x) */
+        
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+        /* Clear floats */
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        /* Change styles for cancel button and signup button on extra small screens */
+        
+        @media screen and (max-width: 300px) {
+            .cancelbtn,
+            .signupbtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div>
+            <img id="logo" src="../image/Screenshot 2023-01-20 at 1.01.57 AM.png" alt="logo">
+            <div>Category <img src="../image//arrow-204-xxl1.png" alt=""></div>
+            <div>Brands <img src="../image//arrow-204-xxl1.png" alt=""></div>
+            <input type="text" placeholder="Search for Products">
+            <!-- <img id="cartlogo" src="../image/Screenshot 2023-01-20 at 4.49.00 PM.png" alt=""> -->
+            <img id="cartlogo" src="../image//Screenshot 2023-01-20 at 4.42.03 PM.png" alt="">
+            <!-- <div><a href="#" id="signbtn">Sign in / Sign up</a></div> -->
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in / Sign up</button>
+
+        </div>
+    </nav>
+
+
+    <!-- Button to open the modal -->
+    <button onclick="document.getElementById('id01').style.display='block'">Sign Up</button>
+
+    <!-- The Modal (contains the Sign Up form) -->
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">close</span>
+        <form class="modal-content">
+            <div class="container">
+                <h1>Sign Up</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+                <label for="email"><b>Name</b></label>
+                <input id="name" type="text" placeholder="Enter Name" name="email" required>
+
+                <label for="email"><b>Email</b></label>
+                <input id="email" type="text" placeholder="Enter Email" name="email" required>
+
+                <label for="psw-repeat"><b>Password</b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="psw-repeat" required>
+
+                <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label>
+
+                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="window.location.href='./index.html'" , class="cancelbtn">Cancel</button>
+                    <input id="sub" type="submit" class="signup"></input>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    // Get the modal
+    document.getElementById('id01').style.display = 'block'
+    let temp = document.querySelector("form")
+    temp.addEventListener("submit", run)
+
+    function run(e) {
+        e.preventDefault();
+        let obj = {
+            name: document.querySelector("#name").value,
+            email: document.querySelector("#email").value,
+            password: document.querySelector("#password").value
+        }
+        console.log(obj);
+        fetchdata(obj)
+    }
+
+    async function fetchdata(obj) {
+        try {
+            let res = await fetch("http://localhost:6600/user/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            })
+            let data = await res.json();
+            alert(data.message)
+            window.location.href = "./index.html"
+        } catch (error) {
+            alert({
+                "Error": error.message
+            })
+            console.log(error);
+        }
+    }
+</script>
+
+</html>
