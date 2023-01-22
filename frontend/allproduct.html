@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f3f4;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        nav {
+            height: 60px;
+            background-color: rgb(37, 37, 37);
+            position: fixed;
+            top: 0;
+            width: 100vmax;
+            z-index: 16;
+        }
+        
+        nav>div {
+            max-width: 1150px;
+            /* border: 1px solid red; */
+            margin: auto;
+            height: 59px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end
+        }
+        
+        #logo {
+            width: 180px;
+            height: 50px;
+            cursor: pointer;
+            /* border: 1px solid green; */
+        }
+        
+        #cartlogo {
+            width: 45px;
+            height: 45px;
+            padding: 0px;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        nav>div>div>img {
+            width: 15px;
+            height: 25px;
+            padding-top: 0px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        nav>div>div {
+            font-size: 20px;
+            color: white;
+            /* border: 1px solid red; */
+            height: 35px;
+            padding-bottom: 19px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        nav>div>input {
+            width: 400px !important;
+            height: 40px !important;
+            margin-bottom: 10px !important;
+            background-color: rgb(75, 75, 77) !important;
+            border: none !important;
+            border-radius: 4px !important;
+            color: white !important;
+            padding-left: 10px !important;
+        }
+        
+        nav>div>input::placeholder {
+            color: rgb(169, 166, 166);
+            font-size: larger;
+        }
+        
+        #logoutbtn {
+            font-size: 20px;
+            height: 50px;
+        }
+        
+        #signbtn {
+            transition: .3s;
+        }
+        
+        #signbtn:hover {
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+        
+        #upf {
+            background-color: rgb(247, 245, 245);
+            height: 125px;
+            /* border: 1px solid green; */
+            display: flex;
+            justify-content: center;
+        }
+        
+        #upf>div {
+            /* border: 1px solid blue; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 1200px;
+        }
+        
+        #f {
+            background-color: white;
+            /* border: 1px solid green; */
+            display: flex;
+            justify-content: center;
+        }
+        
+        #f>img {
+            /* border: 1px solid red; */
+            max-width: 1250px;
+            margin-left: 50px;
+        }
+        /* Full-width input fields */
+        
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        /* Set a style for all buttons */
+        
+        button {
+            background-color: #232523;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            height: 45px;
+            width: 100%;
+            transition: .3s;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+            /* transform: scale3d(1.1, 1.1, 1.1); */
+        }
+        
+        #sub {
+            background-color: #232523;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            height: 45px;
+            width: 100%;
+            transition: .3s;
+        }
+        
+        #sub:hover {
+            opacity: 0.8;
+            /* transform: scale3d(1.1, 1.1, 1.1); */
+        }
+        /* Extra styles for the cancel button */
+        
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+        /* Center the image and position the close button */
+        
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+        
+        .container {
+            padding: 16px;
+        }
+        
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+        /* The Modal (background) */
+        
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 17;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+        /* Modal Content/Box */
+        
+        .modal-content {
+            padding: 23px;
+            padding-top: 2px;
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 60%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            /* Could be more or less, depending on screen size */
+        }
+        /* The Close Button (x) */
+        
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+        /* Add Zoom Animation */
+        
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+        
+        @-webkit-keyframes animatezoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+        
+        @keyframes animatezoom {
+            from {
+                transform: scale(0)
+            }
+            to {
+                transform: scale(1)
+            }
+        }
+        /* Change styles for span and cancel button on extra small screens */
+        
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+        /* css for product page */
+        
+        .big-cont {
+            max-width: 1250px;
+            height: 80px;
+            margin: auto;
+        }
+        
+        .containerr {
+            max-width: 1250px;
+            height: 1000px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .containerr>div:nth-child(1) {
+            width: 25%;
+            /* border: 1px solid green; */
+            height: 840px;
+            border-radius: 10px;
+            background-color: white;
+        }
+        
+        .containerr>div:nth-child(2) {
+            width: 74%;
+            /* border: 1px solid blue; */
+            /* height: auto; */
+        }
+        
+        #main {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 10px;
+        }
+        
+        #card {
+            /* border: 1px solid green; */
+            width: 99%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <img id="logo" src="../image/Screenshot 2023-01-20 at 1.01.57 AM.png" alt="logo">
+            <div>Category <img src="../image//arrow-204-xxl1.png" alt=""></div>
+            <div>Brands <img src="../image//arrow-204-xxl1.png" alt=""></div>
+            <input type="text" placeholder="Search for Products">
+            <!-- <img id="cartlogo" src="../image/Screenshot 2023-01-20 at 4.49.00 PM.png" alt=""> -->
+            <img id="cartlogo" src="../image//Screenshot 2023-01-20 at 4.42.03 PM.png" alt="">
+            <!-- <div><a href="#" id="signbtn">Sign in / Sign up</a></div> -->
+            <button id="signbtn" style="width:auto;"></button>
+
+        </div>
+    </nav>
+
+    <div style="display: block; height: 60px;"></div>
+
+    <div class="big-cont">
+        <select name="select" id="sorttag" style="
+        float: right;
+        width: 300px;
+        height:45px;
+        margin-top: 30px;
+        margin-right: 5px;
+        background-color: #eff2f3;
+        border-radius: 4px;
+        padding: 10px;
+        border: 1px solid rgb(201, 199, 199);
+        ">
+            <option value="volvo">Sort By : Popularity </option>
+            <option value="saab">Price Low to High</option>
+            <option value="opel">Price High to Low</option>
+          </select>
+    </div>
+
+    <div class="containerr">
+        <div>
+            <div style="height: 45px; display: flex; justify-content: space-between; padding: 15px; background-color: #f0f3f4;border-radius: 10px 10px 0px 0px ;">
+                <h3 style="font-size: 16px;">Filters</h3>
+                <h3 style="font-size: 16px; color: rgb(214, 20, 65);">Clear All</h3>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="height: 60px; margin: 0;padding-left: 15px;">
+                <h3 style=" font-size: 17px;">Department</h3>
+                <p style="
+                background-color:  #eff2f3; 
+                color: rgb(157, 154, 154); 
+                font-weight: 100; 
+                width: 95px; padding: 4px; 
+                border-radius: 50px; 
+                font-size: 13px;">Men's Clothing</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="height: 60px; margin: 0;padding-left: 15px;">
+                <h3 style=" font-size: 17px;">Category</h3>
+                <p style="
+                background-color:  #eff2f3; 
+                color: rgb(157, 154, 154); 
+                font-weight: 100; 
+                width: 84px; padding: 4px; 
+                border-radius: 50px; 
+                font-size: 13px;">Casual Wear</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="height: 60px; margin: 0;padding-left: 15px;">
+                <h3 style=" font-size: 17px;">Product type</h3>
+                <p style="
+                background-color:  #eff2f3; 
+                color: rgb(157, 154, 154); 
+                font-weight: 100; 
+                width: 90px; padding: 4px; 
+                border-radius: 50px; 
+                font-size: 13px;">T-shirt - Polos</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style=" font-size: 17px;">Brand</h3>
+                <p style="  color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style=" padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style=" font-size: 17px;">Size</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Type</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Colour</h3>
+                <p style="  color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Collar</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Price</h3>
+                <p style="  color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Discount</h3>
+                <p style="  color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Sleeve</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Fabric Family</h3>
+                <p style="  color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Fit</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+            <hr style="width: 85%; margin: 8px;">
+
+            <div style="padding-left: 15px; padding-right: 40px; display: flex; justify-content: space-between;align-items: center;">
+                <h3 style=" font-size: 17px;">Pattern</h3>
+                <p style=" color: #888; font-size: 20px;height: 30px; margin-bottom: 3px;">+</p>
+            </div>
+
+
+        </div>
+
+        <!-- &&-------------------------------------------------->
+
+        <div id="main">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="upf">
+        <div>
+            <h6>Tata Trust</h6>
+            <h6>QUiQ PiQ</h6>
+            <h6>Authentic Brands</h6>
+            <h6>Easy Return</h6>
+        </div>
+    </div>
+
+    <div id="f"><img src="../image//footer.png" alt=""></div>
+    <div style="display: flex; justify-content: center; background-color: white;">
+        <p style="opacity: 50%;font-size: 12px;">@2023 Fashion Cliq | All rights reserved</p>
+    </div>
+
+    <!-- login page starts here -->
+    <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button> -->
+
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container">
+                <h1>Sign in Form</h1>
+                <label for="uname"><b>Email</b></label>
+                <input id="email" type="text" placeholder="Enter Email" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+
+                <input id="sub" type="submit">Login</button>
+                <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">New User? <a href="./signUp.html">Sign Up here</a></span>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    let temp = document.querySelector("form")
+    temp.addEventListener("submit", run)
+
+    function run(e) {
+        e.preventDefault();
+        let obj = {
+                email: document.querySelector("#email").value,
+                password: document.querySelector("#password").value
+            }
+            // console.log(obj);
+        fetchdata(obj)
+    }
+
+    async function fetchdata(obj) {
+        try {
+            let res = await fetch("http://localhost:6600/user/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            })
+            let data = await res.json();
+            console.log(data.Token)
+            localStorage.setItem("token", data.Token)
+            check()
+            alert(data.message)
+            window.location.reload()
+        } catch (error) {
+            alert({
+                "Error": error.message
+            })
+            console.log(error);
+        }
+    }
+
+
+    // dynamic signin /logout
+    // onclick="document.getElementById('id01').style.display='block'"
+    check()
+
+    function check() {
+        token = localStorage.getItem("token")
+        if (token == "undefined" || !token) {
+            token = false;
+        }
+        if (token) {
+            let x = document.querySelector("#signbtn");
+            x.innerHTML = "Logout"
+            x.style.fontsize = "200px"
+            x.setAttribute("onclick", "logout()")
+            x.setAttribute("id", "logoutbtn")
+
+        } else {
+            let x = document.querySelector("#signbtn");
+            x.innerHTML = "Sign in / Sign up";
+            x.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+        }
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.reload()
+    }
+
+    // ----------------------------------------
+    //   display data
+
+    fetchit();
+    async function fetchit(req, res) {
+        try {
+            let res = await fetch("http://localhost:6600/product/all")
+            let data = await res.json()
+            console.log(JSON.stringify(data));
+            display(data);
+        } catch (error) {
+            console.log({
+                "Error": error.message
+            });
+            alert(JSON.stringify(error.message));
+
+        }
+    }
+
+    function display(data) {
+        document.querySelector("#main").innerHTML +=
+            data.map((elem) => {
+                return `
+                <div id="card">
+                <img style="width: 295px; height: 380px;" src="${elem.image}" alt="product image">
+                <h1 style="font-size: 23px;margin-top: 10px;">${elem.title}</h1>
+                <p style="font-size: 17px;margin-top: -10px;">${elem.description}</p>
+                <div style="display: flex; width: 100px; justify-content: space-around;margin-top: -10px;">
+                    <p style="margin-top: -7px;">₹${elem.discprice}</p><span style="margin-top: -7px;text-decoration:line-through; opacity: 60%;">${elem.discprice}</span>
+                </div>
+
+            </div>
+                `
+            }).join("")
+    }
+</script>
+
+</html>

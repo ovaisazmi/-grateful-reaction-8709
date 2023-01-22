@@ -29,26 +29,15 @@ product_router.get("/all", async(req, res) => {
 
 
 product_router.post("/create", async(req, res) => {
-
-    const files = req.files.photo;
-    cloudinary.uploader.upload(files.tempFilePath, async(err, result) => {
-        if (result) {
-            let payload = req.body;
-            payload.image = result.url
-
-            try {
-                let newnote = new product_model(payload);
-                await newnote.save();
-                res.send({ "message": "Product Added" })
-            } catch (error) {
-                console.log(error.message);
-                res.send({ "message": "Error while creating Note", "ErrMess": error.message })
-            }
-        }
-    })
-
-
-
+    let payload = req.body;
+    try {
+        let newnote = new product_model(payload);
+        await newnote.save();
+        res.send({ "message": "Product Added" })
+    } catch (error) {
+        console.log(error.message);
+        res.send({ "message": "Error while creating Note", "ErrMess": error.message })
+    }
 })
 
 
