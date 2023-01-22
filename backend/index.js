@@ -3,18 +3,24 @@ const cors = require("cors")
 const { connection } = require("./config/db");
 require("dotenv").config();
 const { router } = require("./routes/user_route")
-const { product_router } = require("./routes/notes_route")
+const { product_router } = require("./routes/product_route")
 const { authentication } = require("./Middleware/authontication")
+const fileupload = require("express-fileupload")
+
 
 const app = express();
 app.use(express.json());
 app.use(cors())
+app.use(fileupload({
+    useTempFiles: true
+}))
 
 app.use("/user", router);
 
-app.use(authentication)
 
-app.use("/notes", product_router)
+app.use("/product", product_router)
+
+app.use(authentication)
 
 app.get("/", (req, res) => {
     res.send("Home Page")
