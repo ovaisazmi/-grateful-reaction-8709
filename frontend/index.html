@@ -579,7 +579,9 @@
                 body: JSON.stringify(obj)
             })
             let data = await res.json();
+            console.log(data.Token)
             localStorage.setItem("token", data.Token)
+            check()
             alert(data.message)
             window.location.reload()
         } catch (error) {
@@ -593,18 +595,26 @@
 
     // dynamic signin /logout
     // onclick="document.getElementById('id01').style.display='block'"
+    check()
 
-    if (localStorage.getItem("token")) {
-        let x = document.querySelector("#signbtn");
-        x.innerHTML = "Logout"
-        x.style.fontsize = "200px"
-        x.setAttribute("onclick", "logout()")
-        x.setAttribute("id", "logoutbtn")
+    function check() {
+        token = localStorage.getItem("token")
+        console.log(token);
+        if (token == "undefined" || !token) {
+            token = false;
+        }
+        if (token) {
+            let x = document.querySelector("#signbtn");
+            x.innerHTML = "Logout"
+            x.style.fontsize = "200px"
+            x.setAttribute("onclick", "logout()")
+            x.setAttribute("id", "logoutbtn")
 
-    } else {
-        let x = document.querySelector("#signbtn");
-        x.innerHTML = "Sign in / Sign up";
-        x.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+        } else {
+            let x = document.querySelector("#signbtn");
+            x.innerHTML = "Sign in / Sign up";
+            x.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+        }
     }
 
     function logout() {

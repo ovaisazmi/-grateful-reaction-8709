@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            margin: auto;
+            margin-top: 80px;
+            height: 300px;
+            width: 800px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            row-gap: 20px;
+            font-size: 30px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="heads head_homepage">Registration Page</h3>
+    <form action="" enctype="multipart/form-data">
+        <label for="name">Tile</label>
+        <input type="text" id="title" placeholder="Enter Title" required>
+
+        <label for="email">Description</label>
+        <input type="text" id="description" placeholder="Enter Description" required>
+
+        <label for="password">Price</label>
+        <input type="number" id="price" placeholder="Enter Price" required>
+
+        <label for="age">Discount Price</label>
+        <input type="number" id="discountprice" placeholder="Enter Discount Price" required>
+
+        <label for="age">Image</label>
+        <input type="file" name="photo" id="image" placeholder="Select Image" required>
+
+        <label for="submit"></label>
+        <input type="submit">
+    </form>
+</body>
+<script>
+    let form = document.querySelector("form");
+    form.addEventListener("submit", register)
+
+    function register(event) {
+        event.preventDefault()
+        let obj = {
+            title: form.title.value,
+            description: form.description.value,
+            price: form.price.value,
+            discprice: form.discountprice.value,
+            image: form.image.value
+        }
+        console.log(obj);
+        connection();
+        async function connection(req, res) {
+            try {
+                let res = await fetch("http://localhost:6600/product/create", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                let data = await res.json()
+                alert(JSON.stringify(data.message));
+                console.log(JSON.stringify(data));
+            } catch (error) {
+                console.log({
+                    "Error": error.message
+                });
+                alert(JSON.stringify(error.message));
+
+            }
+        }
+    }
+</script>
+
+</html>
